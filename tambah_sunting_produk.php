@@ -14,6 +14,7 @@
     if(isset($_POST['tambah'])){
         $name = $_POST['name'];
         $price = $_POST['price'];
+        $stock = $_POST['stock'];
         $image = $_FILES['image']['name'];
         $image_size = $_FILES['image']['size'];
         $is_available = $_POST['is_available'];
@@ -27,7 +28,7 @@
         } else {
             move_uploaded_file($_FILES['image']['tmp_name'], 'uploads/products/' . $image);
 
-            $insert = mysqli_query($koneksi, "INSERT INTO products (name, price, image, is_available, category_id) VALUES ('$name', '$price', '$image', '$is_available', '$category_id');");
+            $insert = mysqli_query($koneksi, "INSERT INTO products (name, price, image, is_available, category_id, stock) VALUES ('$name', '$price', '$image', '$is_available', '$category_id', '$stock');");
 
             if ($insert) {
                 header("Location: daftar_produk.php?tambah=sukses");
@@ -47,6 +48,7 @@
                 $id = $_GET['id-produk'];
                 $name = $_POST['name'];
                 $price = $_POST['price'];
+                $stock = $_POST['stock'];
                 $image = $_FILES['image']['name'];
                 $image_size = $_FILES['image']['size'];
                 $is_available = $_POST['is_available'];
@@ -61,7 +63,7 @@
                     unlink("uploads/products/" . $row_edit['image']);
                     move_uploaded_file($_FILES['image']['tmp_name'], "uploads/products/" . $image);
                     
-                    $update = mysqli_query($koneksi, "UPDATE products SET name = '$name', price = '$price', image = '$image', is_available = '$is_available', category_id = '$category_id' WHERE id = '$id';");
+                    $update = mysqli_query($koneksi, "UPDATE products SET name = '$name', price = '$price', image = '$image', is_available = '$is_available', category_id = '$category_id', stock = '$stock' WHERE id = '$id';");
 
                     if ($update) {
                         header("Location: daftar_produk.php?edit=sukses");
@@ -123,6 +125,10 @@
                 </div>
                 <div class="row">
                     <div class="col-md-6">
+                    <label class="form-label fw-bold fs-30 text-light" for="stock">Stok: </label>
+                    <input type="number" id="stock" name="stock" class="form-control" <?php echo isset($_GET['id-produk']) ? $row_edit['stock'] : ''; ?>>
+                    </div>
+                    <div class="col-md-6">
                     <label class="form-label fw-bold fs-30 text-light" for="is_available">Status Ketersediaan: </label>
                     <div class="form-check">
                         <input class="form-check-input" type="checkbox" name="is_available" id="tidak_tersedia" value="0" <?php echo isset($_GET['id-produk']) && $row_edit['is_available'] == 0 ? 'checked' : ''; ?>>
@@ -135,7 +141,7 @@
                         <label class="form-check-label text-light" for="tersedia">
                             Tersedia
                         </label>
-                    </div>               
+                    </>               
                     </div>
                 </div>
                 <div class="row">

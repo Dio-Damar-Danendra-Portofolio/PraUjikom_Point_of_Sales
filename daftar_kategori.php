@@ -48,10 +48,10 @@
                                 <td><?php echo ++$i; ?></td>
                                 <td><?php echo $kategori['name']; ?></td>
                                 <td>
-                                    <a class="btn btn-info btn-md" title="Edit Data" href="tambah_sunting_produk.php?id-produk=<?php echo $produk['id']; ?>">
+                                    <a class="btn btn-info btn-md" title="Edit Data" href="tambah_sunting_kategori.php?id-kategori=<?php echo $kategori['id']; ?>">
                                         <i class="bi bi-gear-fill"></i>
                                     </a>
-                                    <a class="btn btn-danger btn-md" title="Hapus Data" href="daftar_produk.php?id-hapus=<?php echo $produk['id']; ?>" onclick="return confirm('Apakah Anda yakin untuk menghapus data ini?'); ">
+                                    <a class="btn btn-danger btn-md" title="Hapus Data" href="daftar_kategori.php?id-hapus=<?php echo $kategori['id']; ?>" onclick="return confirm('Apakah Anda yakin untuk menghapus data ini?'); ">
                                         <i class="bi bi-trash"></i>
                                     </a>
                                 </td>

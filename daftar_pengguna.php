@@ -10,6 +10,11 @@
         header("Location: login.php");
         exit;
     }
+    if (isset($_GET['id-hapus'])) {
+        $id = $_GET['id-hapus'];
+        $hapus = mysqli_query($koneksi, "DELETE FROM users WHERE id = '$id';");
+        header("Location: daftar_pengguna.php?hapus=sukses");
+    }
 ?>
 <!DOCTYPE html>
 <html lang="id-ID">
@@ -49,10 +54,10 @@
                             <td><?php echo $user['phone_number']; ?></td>
                             <td><img src="uploads/profile_pictures/<?php echo $user['profile_picture']; ?>" width="100" alt="Foto Tidak Tersedia"></td>
                             <td>
-                                <a class="btn btn-info btn-md" title="Edit Data" href="tambah_sunting_produk.php?id-produk=<?php echo $produk['id']; ?>">
+                                <a class="btn btn-info btn-md" title="Edit Data" href="tambah_sunting_pengguna.php?id-pengguna=<?php echo $user['id']; ?>">
                                     <i class="bi bi-gear-fill"></i>
                                 </a>
-                                <a class="btn btn-danger btn-md" title="Hapus Data" href="daftar_produk.php?id-hapus=<?php echo $produk['id']; ?>" onclick="return confirm('Apakah Anda yakin untuk menghapus data ini?'); ">
+                                <a class="btn btn-danger btn-md" title="Hapus Data" href="daftar_pengguna.php?id-hapus=<?php echo $user['id']; ?>" onclick="return confirm('Apakah Anda yakin untuk menghapus data ini?'); ">
                                     <i class="bi bi-trash"></i>
                                 </a>
                             </td>

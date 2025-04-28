@@ -83,7 +83,7 @@
                 <div class="row bg-danger justify-content-left">
                     <div class="col-lg-12">
                         <div class="text-white text-left">
-                            <h1><?php echo isset($_GET['id-kategori']) ? 'Ubah Data ' : 'Tambah '?> Kategori Produk</h1>
+                            <h1><?php echo isset($_GET['id-pengguna']) ? 'Ubah Data ' : 'Tambah '?> Pengguna</h1>
                         </div>
                     </div>
                 </div>

@@ -5,11 +5,9 @@
     require "koneksi.php";
     include "include/nav.php";
     $kueri_order = mysqli_query($koneksi, "SELECT products.price AS product_price, 
-    products.name AS product_name, order_details.qty AS product_quantity, 
-    order_details.subtotal AS order_subtotal, orders.* FROM orders 
+    products.name AS product_name, order_details.qty AS quantity, order_details.subtotal AS order_subtotal, orders.* FROM orders 
     JOIN order_details ON order_details.order_id = orders.id
-    JOIN products ON order_details.product_id = products.id
-    WHERE orders.qty > 10;");
+    JOIN products ON order_details.product_id = products.id;");
     $row_order = mysqli_fetch_all($kueri_order, MYSQLI_ASSOC);
 
     if (!isset($_SESSION['NAME'])) {
@@ -48,7 +46,7 @@
                             <tr>
                                 <td><?php echo ++$i; ?></td>
                                 <td><?php echo $order['product_name']; ?></td>
-                                <td><?php echo $order['product_quantity']; ?></td>
+                                <td><?php echo $order['quantity']; ?></td>
                                 <td><?php echo $order['product_price']; ?></td>
                                 <td><?php echo $order['code']; ?></td>
                                 <td><?php echo $order['status'] == 1 ? 'Dibayar' : 'Belum Dibayar'; ?></td>
