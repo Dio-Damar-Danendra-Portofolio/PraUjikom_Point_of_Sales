@@ -4,7 +4,7 @@
 
     require_once "../koneksi.php";
 
-    $query = "SELECT * FROM products WHERE is_available = 1;";
+    $query = "SELECT * FROM products WHERE stock > 0;";
 
     $hasil = mysqli_query($koneksi, $query);
 

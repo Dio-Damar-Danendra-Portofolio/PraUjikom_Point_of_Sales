@@ -15,9 +15,9 @@
         $name = $_POST['name'];
         $price = $_POST['price'];
         $stock = $_POST['stock'];
+        $description = $_POST['description'];
         $image = $_FILES['image']['name'];
         $image_size = $_FILES['image']['size'];
-        $is_available = $_POST['is_available'];
         $category_id = (int) $_POST['category_id'];
         
         $extension = array('png', 'jpg', 'jpeg');
@@ -28,7 +28,8 @@
         } else {
             move_uploaded_file($_FILES['image']['tmp_name'], 'uploads/products/' . $image);
 
-            $insert = mysqli_query($koneksi, "INSERT INTO products (name, price, image, is_available, category_id, stock) VALUES ('$name', '$price', '$image', '$is_available', '$category_id', '$stock');");
+            $insert = mysqli_query($koneksi, "INSERT INTO products (name, price, image, category_id, stock, description) 
+            VALUES ('$name', '$price', '$image', '$category_id', '$stock', '$description');");
 
             if ($insert) {
                 header("Location: daftar_produk.php?tambah=sukses");
@@ -49,9 +50,9 @@
                 $name = $_POST['name'];
                 $price = $_POST['price'];
                 $stock = $_POST['stock'];
+                $description = $_POST['description'];
                 $image = $_FILES['image']['name'];
                 $image_size = $_FILES['image']['size'];
-                $is_available = $_POST['is_available'];
                 $category_id = (int) $_POST['category_id'];
                 
                 $extension = array('png', 'jpg', 'jpeg');
@@ -63,7 +64,7 @@
                     unlink("uploads/products/" . $row_edit['image']);
                     move_uploaded_file($_FILES['image']['tmp_name'], "uploads/products/" . $image);
                     
-                    $update = mysqli_query($koneksi, "UPDATE products SET name = '$name', price = '$price', image = '$image', is_available = '$is_available', category_id = '$category_id', stock = '$stock' WHERE id = '$id';");
+                    $update = mysqli_query($koneksi, "UPDATE products SET name = '$name', price = '$price', image = '$image', category_id = '$category_id', stock = '$stock', description = '$description' WHERE id = '$id';");
 
                     if ($update) {
                         header("Location: daftar_produk.php?edit=sukses");
@@ -127,22 +128,11 @@
                     <div class="col-md-6">
                     <label class="form-label fw-bold fs-30 text-light" for="stock">Stok: </label>
                     <input type="number" id="stock" name="stock" class="form-control" <?php echo isset($_GET['id-produk']) ? $row_edit['stock'] : ''; ?>>
-                    </div>
+                    </div>  
                     <div class="col-md-6">
-                    <label class="form-label fw-bold fs-30 text-light" for="is_available">Status Ketersediaan: </label>
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" name="is_available" id="tidak_tersedia" value="0" <?php echo isset($_GET['id-produk']) && $row_edit['is_available'] == 0 ? 'checked' : ''; ?>>
-                        <label class="form-check-label text-light" for="tidak_tersedia">
-                            Tidak Tersedia
-                        </label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" name="is_available" id="tersedia" value="1" <?php echo isset($_GET['id-produk']) && $row_edit['is_available'] == 1 ? 'checked' : ''; ?>>
-                        <label class="form-check-label text-light" for="tersedia">
-                            Tersedia
-                        </label>
-                    </>               
-                    </div>
+                    <label class="form-label fw-bold fs-30 text-light" for="description">Deskripsi Produk: </label>
+                    <textarea name="description" id="description" class="form-control" cols="30" rows="10" value="<?php echo isset($_GET['id-produk']) ? $row_edit['description'] : ''; ?>"></textarea>
+                    </div>  
                 </div>
                 <div class="row">
                     <div class="col-md-6 justify-content-center mt-4 d-flex flex-wrap">

@@ -47,6 +47,10 @@
         case 'profil.php':
             $title = "Profil Anda - Resto PPKD Jakarta Pusat";
             break;
+        
+        case 'laporan.php':
+            $title = "Laporan Transaksi - Resto PPKD Jakarta Pusat";
+            break;
             
         default:
             $title = ucfirst($laman);

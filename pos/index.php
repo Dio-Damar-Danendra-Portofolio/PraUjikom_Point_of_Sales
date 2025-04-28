@@ -4,7 +4,7 @@
 require_once '../koneksi.php'; // Ubah path sesuai struktur proyek kamu
 
 // Query ambil data produk aktif
-$query = "SELECT * FROM products WHERE is_available = 1;";
+$query = "SELECT * FROM products WHERE stock > 0;";
 
 $result = mysqli_query($koneksi, $query);
 
@@ -631,7 +631,7 @@ if (isset($_POST['print'])) {
                     <input type="hidden" name="total" :value="getTotalPrice()">
                     <button class="bg-cyan-500 text-white text-lg px-4 py-3 rounded-2xl w-full focus:outline-none"
                     x-on:click="printAndProceed()">
-                    PROCEED
+                    CETAK STRUK
                     </button>
                 </form>
                 </div>

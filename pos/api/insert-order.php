@@ -8,15 +8,14 @@ if (!$koneksi) {
 }
 
 // Ambil nomor urut
-$getdata = mysqli_query($koneksi, "SELECT MAX(RIGHT(code,4)) + 1 AS nextnumber FROM orders WHERE LEFT(code, 8) = '" . date('dmY') . "' ");
-if (!$getdata) {
-    die('Query Error: ' . mysqli_error($koneksi));
+$getdata = mysqli_query($koneksi, "SELECT max(right(code,4)) + 1 as nextnumber FROM orders WHERE left(code, 11) = '$today'; ");
+$check_data = mysqli_num_rows($getdata);
+if ($check_data > 0) {
+    $row_data =  mysqli_fetch_assoc($getdata);
 }
 
-$rows = mysqli_fetch_assoc($getdata);
-$nextnum = isset($rows['nextnumber']) && $rows['nextnumber'] != null ? sprintf('%04s', $rows['nextnumber']) : '0001';
-
-$code = 'ORD' . date('dmY') . $nextnum;
+$product_order_code = 'ORD_' . date('dmY_His');
+$date_today = date('Y-m-d');
 
 // Validasi input
 $total = isset($_POST['total']) ? $_POST['total'] : 0;
@@ -27,11 +26,9 @@ if (empty($cart)) {
     die('Cart kosong.');
 }
 
-// Insert ke orders
-$query = "INSERT INTO `orders` (`code`, `amount`, `change`, `status`) 
-VALUES ('$code', '$total', '$change', '1')";
 
-$result = mysqli_query($koneksi, $query);
+$result = mysqli_query($koneksi, "INSERT INTO `orders` (`code`, `amount`, `change`, `status`, `date`) 
+VALUES ('$product_order_code', '$total', '$change', '1', '$date_today');");
 
 if ($result) {
     $last_id = mysqli_insert_id($koneksi);
@@ -46,9 +43,9 @@ if ($result) {
             mysqli_query($koneksi, "UPDATE products SET stock = stock - '{$item['qty']}' WHERE id = '{$item['productId']}'");
         }
     }
-    header('location: ../index.php?order=' . $code);
+    header('Location: ../index.php?order=' . $product_order_code);
     exit();
 } else {
-    die('Error Insert Order: ' . mysqli_error($koneksi));
+    die('Terjadi kesalahan dalam pemesanan: ' . mysqli_error($koneksi));
 }
 ?>

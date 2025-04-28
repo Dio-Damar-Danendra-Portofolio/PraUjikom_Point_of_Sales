@@ -45,8 +45,8 @@
                             <th>Harga</th>
                             <th>Foto Produk</th>
                             <th>Kategori Produk</th>
+                            <th>Deskripsi Produk</th>
                             <th>Stok</th>
-                            <th>Ketersediaan Produk</th>
                             <th>Aksi (Tindakan)</th>
                         </tr>
                         <?php $i = 0; foreach($row_produk as $produk) {?>
@@ -56,8 +56,8 @@
                                 <td><?php echo $produk['price']; ?></td>
                                 <td><img src="uploads/products/<?php echo $produk['image']; ?>" width="100" alt="Foto tidak tersedia"></td>
                                 <td><?php echo $produk['product_category']; ?></td>
+                                <td><?php echo $produk['description']; ?></td>
                                 <td><?php echo $produk['stock']; ?></td>
-                                <td><?php echo isset($produk['is_available']) && $produk['is_available'] == 1 ? 'Tersedia' : 'Tidak Tersedia'; ?></td>
                                 <td>
                                     <a class="btn btn-info btn-md" title="Edit Data" href="tambah_sunting_produk.php?id-produk=<?php echo $produk['id']; ?>">
                                         <i class="bi bi-gear-fill"></i>
