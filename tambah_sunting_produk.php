@@ -89,7 +89,7 @@
                 <div class="row bg-danger justify-content-left">
                     <div class="col-lg-12">
                         <div class="text-white text-left">
-                            <h1><?php echo isset($_GET['id-produk']) ? 'Ubah Data ' : 'Tambah '?> Produk</h1>
+                            <h1><?php echo isset($_GET['id-produk']) ? 'Ubah Data' : 'Tambah'?> Produk</h1>
                         </div>
                     </div>
                 </div>
