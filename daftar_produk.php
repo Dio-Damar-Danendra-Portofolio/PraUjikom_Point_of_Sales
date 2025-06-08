@@ -53,7 +53,7 @@
                             <tr>
                                 <td><?php echo ++$i; ?></td>
                                 <td><?php echo $produk['name']; ?></td>
-                                <td><?php echo $produk['price']; ?></td>
+                                <td><?php echo 'Rp ' . number_format($produk['price'], 0, ',', '.'); ?></td>
                                 <td><img src="uploads/products/<?php echo $produk['image']; ?>" width="100" alt="Foto tidak tersedia"></td>
                                 <td><?php echo $produk['product_category']; ?></td>
                                 <td><?php echo $produk['description']; ?></td>
